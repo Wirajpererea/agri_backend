@@ -41,38 +41,13 @@ module.exports = {
     }
   },
 
-  updateProduct: async (dataParams) => {
-    try {
-      const {productId, name, location, qty, price, userId } = dataParams;
-      const insertQuery = `
-      UPDATE [dbo].[products]
-      SET name = '${name}',
-      location ='${location}',
-      qty = '${qty}',
-      price = ${price} 
-      WHERE product_row_id = ${productId}
-`;
-      const product = await db.query(insertQuery, {
-        type: QueryTypes.UPDATE,
-      });
-
-      return product;
-    } catch (error) {
-      console.log(error);
-      return new Error({ message: error, body: {} });
-    }
-  },
-
   getAllProducts: async (dataParams) => {
     try {
-      const { userId } = dataParams;
-      console.log(dataParams, "DATAPARAMS!");
-      const res = await db.query(
-        `SELECT * FROM Products WHERE user_id = ${userId}`,
-        {
-          type: QueryTypes.SELECT,
-        }
-      );
+      // const { } = dataParams;
+
+      const res = await db.query(`SELECT * FROM Products`, {
+        type: QueryTypes.SELECT,
+      });
 
       return res;
     } catch (error) {

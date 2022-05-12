@@ -7,7 +7,7 @@ module.exports = {
   logIn: async (req, res) => {
     try {
       const user = await authService.login(req.body);
-      if (user.validUser) {
+      if (user) {
         res.send({ message: "success", body: user });
       } else {
         res.send({ message: "fail", body: {} });
