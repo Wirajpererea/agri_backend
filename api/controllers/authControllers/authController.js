@@ -30,4 +30,15 @@ module.exports = {
     }
   },
 
+  getUsers: async (req, res) => {
+    try {
+      const user = await authService.getUsers();
+      res.send({ message: "success", body: user });
+    } catch (error) {
+      res
+        .status(400)
+        .send({ message: "error", body: { message: error.message } });
+    }
+  },
+
 };

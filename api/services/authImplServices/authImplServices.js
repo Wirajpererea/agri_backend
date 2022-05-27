@@ -96,4 +96,20 @@ module.exports = {
       return new Error({ message: error, body: {} });
     }
   },
+
+  getUsers: async (dataParams) => {
+    try {
+      let user;
+      user = await db.query(
+        `SELECT * FROM [dbo].[user] WHERE [type] = 'transporter'`,
+        {
+          type: QueryTypes.SELECT,
+        }
+      );
+      return user;
+    } catch (error) {
+      console.log(error);
+      return new Error({ message: error, body: {} });
+    }
+  },
 };

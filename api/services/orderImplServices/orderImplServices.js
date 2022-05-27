@@ -46,10 +46,11 @@ VALUES
 
       const res = await db.query(
         `
-  SELECT o.*,u.name AS userName,p.name AS productName ,p.price 
+  SELECT o.*,u.name AS userName,p.name AS productName ,p.price ,ut.name AS transporterName
   FROM [dbo].[orders] AS o
 INNER JOIN [dbo].[products] AS p ON p.product_row_id = o.product_row_id
 INNER JOIN [dbo].[user] AS u ON u.user_row_id = o.user_row_id
+LEFT JOIN  [dbo].[user] AS ut ON ut.user_row_id = o.transportedBy
 WHERE u.user_row_id=${userId}`,
         {
           type: QueryTypes.SELECT,
