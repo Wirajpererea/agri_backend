@@ -17,7 +17,7 @@ router.post('/register', asyncHandler(async (req, res) => {
     return authController.register(req, res);
 }));
 
-router.get('/getUsers', asyncHandler(async (req, res) => {
+router.get('/getTransportUsers', asyncHandler(async (req, res) => {
     return authController.getUsers(req, res);
 }));
 
