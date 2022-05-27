@@ -10,9 +10,9 @@ router.post('/', asyncHandler(async (req, res) => {
     return orderController.addOrder(req, res);
 }));
 
-// router.post('/update', asyncHandler(async (req, res) => {
-//     return productController.updateProduct(req, res);
-// }));
+router.post('/updateTransport', asyncHandler(async (req, res) => {
+    return productController.updateTransport(req, res);
+}));
 
 router.get('/', asyncHandler(async (req, res) => {
     return orderController.getOrders(req, res);

@@ -45,13 +45,36 @@ VALUES
       const { userId } = dataParams;
 
       const res = await db.query(
-        `SELECT * 
-      FROM [dbo].[orders] WHERE user_row_id=${userId}`,
+        `
+  SELECT o.*,u.name AS userName,p.name AS productName ,p.price 
+  FROM [dbo].[orders] AS o
+INNER JOIN [dbo].[products] AS p ON p.product_row_id = o.product_row_id
+INNER JOIN [dbo].[user] AS u ON u.user_row_id = o.user_row_id
+WHERE u.user_row_id=${userId}`,
         {
           type: QueryTypes.SELECT,
         }
       );
 
+      return res;
+    } catch (error) {
+      console.log(error);
+      return new Error({ message: error, body: {} });
+    }
+  },
+
+  updateTransport: async (dataParams) => {
+    try {
+      const { transportedBy, orderId } = dataParams;
+      const res = await db.query(
+        `
+        UPDATE  [dbo].[orders] 
+        SET isTransported = 1 , transportedBy = ${transportedBy}
+        WHERE order_row_id = 1${orderId}`,
+        {
+          type: QueryTypes.UPDATE,
+        }
+      );
       return res;
     } catch (error) {
       console.log(error);
