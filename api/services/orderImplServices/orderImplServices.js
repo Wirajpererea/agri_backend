@@ -71,7 +71,7 @@ WHERE u.user_row_id=${userId}`,
         `
         UPDATE  [dbo].[orders] 
         SET isTransported = 1 , transportedBy = ${transportedBy}
-        WHERE order_row_id = 1${orderId}`,
+        WHERE order_row_id = ${orderId}`,
         {
           type: QueryTypes.UPDATE,
         }
