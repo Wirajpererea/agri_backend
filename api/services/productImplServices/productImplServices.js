@@ -68,7 +68,9 @@ module.exports = {
       const { userId } = dataParams;
       console.log(dataParams, "DATAPARAMS!");
       const res = await db.query(
-        `SELECT * FROM Products WHERE user_id = ${userId}`,
+        `SELECT * FROM Products
+        ${userId != '' ? ` WHERE user_id = ${userId}`: ''}
+        `,
         {
           type: QueryTypes.SELECT,
         }

@@ -1,6 +1,6 @@
 "use strict";
 
-const orderService = require("../../services/productImplServices/productImplServices");
+const orderService = require("../../services/orderImplServices/orderImplServices");
 
 module.exports = {
  

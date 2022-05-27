@@ -26,6 +26,8 @@ module.exports = {
         password,
         address,
         recordedBy,
+        vehicleNumber,
+        vehicleType,
       } = dataParams;
       console.log("dataParams==>", dataParams);
       const insertQuery = `
@@ -41,7 +43,9 @@ module.exports = {
                  ,[password]
                  ,[status]
                  ,[recorded_by]
-                 ,[recorded_date])
+                 ,[recorded_date]
+                 ,[vehicleNumber]
+                 ,[vehicleType])
            VALUES
                  (
                   '${name}'
@@ -55,7 +59,10 @@ module.exports = {
                  ,'${password}'
                  ,'active'
                  ,'1'
-                 ,'${moment().format("YYYY-MM-DD")}')`;
+                 ,'${moment().format("YYYY-MM-DD")}'
+                 ,${vehicleNumber ? `'${vehicleNumber}'` : ""}
+                 ,${vehicleType ? `'${vehicleType}'` : ""}
+                 )`;
       console.log("insertQuery==>", insertQuery);
 
       const response = await db.query(insertQuery, {
@@ -71,7 +78,7 @@ module.exports = {
   login: async (dataParams) => {
     try {
       const { email, password } = dataParams;
-      console.log(dataParams,"dataParams")
+      console.log(dataParams, "dataParams");
       let user;
       user = await db.query(
         `SELECT * FROM [dbo].[user]
@@ -80,7 +87,7 @@ module.exports = {
           type: QueryTypes.SELECT,
         }
       );
-      console.log("user==>",user);
+      console.log("user==>", user);
       return user.length > 0
         ? { status: true, user: user[0] }
         : { status: false, user: {} };

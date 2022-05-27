@@ -17,17 +17,19 @@ var storage = multer.diskStorage({
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-'+ file.originalname)
   }
-})
+})  
  
 var upload = multer({ storage: storage })
 
 router.post('/', upload.fields([
     {
       name : 'pics[]',
-      maxCount : 12
+      maxCount : 2
     },
   ]), asyncHandler(async (req, res) => {
-    
+    console.log("files==>",req.file);
+    console.log("files==>",req.files);
+
     return productController.addProduct(req, res);
 }));
 

@@ -12,23 +12,22 @@ const Op = Sequelize.Op;
 const moment = require("moment");
 
 module.exports = {
-  addProduct: async (dataParams) => {
+  addOrder: async (dataParams) => {
     try {
-      const { name, location, qty, price, userId } = dataParams;
-      const insertQuery = `INSERT INTO [dbo].[products]
-      ([name]
-      ,[location]
-      ,[qty]
-      ,[price]
-      ,[user_id])
-   VALUES
-  (
-    '${name}'
-    ,'${location}'
-    ,'${qty}'
-    ,${price}
-    ,${userId}
-  )
+      const { product_row_id, user_row_id, qty, dateRequested } = dataParams;
+      const insertQuery = `
+INSERT INTO [dbo].[orders]
+([product_row_id]
+,[user_row_id]
+,[qty]
+,[dateRequested]
+,[createdDate])
+VALUES
+( '${product_row_id}'
+,'${user_row_id}'
+,'${qty}'
+,'${dateRequested}'
+,'${moment().format("YYYY-MM-DD")}')
 `;
       const product = await db.query(insertQuery, {
         type: QueryTypes.INSERT,
@@ -41,13 +40,17 @@ module.exports = {
     }
   },
 
-  getAllProducts: async (dataParams) => {
+  getAllOrders: async (dataParams) => {
     try {
       // const { } = dataParams;
 
-      const res = await db.query(`SELECT * FROM Products`, {
-        type: QueryTypes.SELECT,
-      });
+      const res = await db.query(
+        `SELECT * 
+      FROM [dbo].[orders]`,
+        {
+          type: QueryTypes.SELECT,
+        }
+      );
 
       return res;
     } catch (error) {

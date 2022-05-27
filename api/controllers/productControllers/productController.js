@@ -38,5 +38,4 @@ module.exports = {
         .send({ message: "error", body: { message: error.message } });
     }
   },
-
 };
