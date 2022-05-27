@@ -14,9 +14,9 @@ router.post('/', asyncHandler(async (req, res) => {
 //     return productController.updateProduct(req, res);
 // }));
 
-// router.get('/', asyncHandler(async (req, res) => {
-//     return productController.getAllProducts(req, res);
-// }));
+router.get('/', asyncHandler(async (req, res) => {
+    return orderController.getOrders(req, res);
+}));
 
 
 module.exports = router;

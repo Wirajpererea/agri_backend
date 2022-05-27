@@ -40,13 +40,13 @@ VALUES
     }
   },
 
-  getAllOrders: async (dataParams) => {
+  getOrders: async (dataParams) => {
     try {
-      // const { } = dataParams;
+      const { userId } = dataParams;
 
       const res = await db.query(
         `SELECT * 
-      FROM [dbo].[orders]`,
+      FROM [dbo].[orders] WHERE user_row_id=${userId}`,
         {
           type: QueryTypes.SELECT,
         }
