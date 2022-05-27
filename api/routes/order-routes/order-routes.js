@@ -11,7 +11,7 @@ router.post('/', asyncHandler(async (req, res) => {
 }));
 
 router.post('/updateTransport', asyncHandler(async (req, res) => {
-    return productController.updateTransport(req, res);
+    return orderController.updateTransport(req, res);
 }));
 
 router.get('/', asyncHandler(async (req, res) => {
