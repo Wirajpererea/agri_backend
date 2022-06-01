@@ -14,7 +14,6 @@ const moment = require("moment");
 module.exports = {
   register: async (dataParams) => {
     try {
-      console.log(dataParams, "HERE");
       const {
         name,
         nic,
@@ -60,8 +59,8 @@ module.exports = {
                  ,'active'
                  ,'1'
                  ,'${moment().format("YYYY-MM-DD")}'
-                 ,${vehicleNumber ? `'${vehicleNumber}'` : ""}
-                 ,${vehicleType ? `'${vehicleType}'` : ""}
+                 ,${vehicleNumber ? `'${vehicleNumber}'` : `'N/A'`}
+                 ,${vehicleType ? `'${vehicleType}'` : `'N/A'`}
                  )`;
       console.log("insertQuery==>", insertQuery);
 
