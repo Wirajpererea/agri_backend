@@ -69,7 +69,7 @@ module.exports = {
       console.log(dataParams, "DATAPARAMS!");
       const res = await db.query(
         `SELECT * FROM Products
-        ${userId != '' ? ` WHERE user_id = ${userId}`: ''}
+        ${userId ? ` WHERE user_id = ${userId}`: ''}
         `,
         {
           type: QueryTypes.SELECT,
