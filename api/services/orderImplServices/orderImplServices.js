@@ -51,7 +51,7 @@ VALUES
 INNER JOIN [dbo].[products] AS p ON p.product_row_id = o.product_row_id
 INNER JOIN [dbo].[user] AS u ON u.user_row_id = o.user_row_id
 LEFT JOIN  [dbo].[user] AS ut ON ut.user_row_id = o.transportedBy
-WHERE u.user_row_id=${userId}`,
+WHERE u.user_row_id=${userId} OR p.user_id = ${userId} OR o.transportedBy = ${userId}`,
         {
           type: QueryTypes.SELECT,
         }
